@@ -10,6 +10,7 @@ list_of_indexes = []
 list_of_not_in_word_letters = []
 list_of_random_line = []
 chances = 10
+# x = random.randrange(0, 184)
 
 print()
 print(password)
@@ -31,13 +32,30 @@ with open('countries-and-capitals.txt') as hangman_password_list:
     hangman_password_list.close()
 
 print('++++++++++++++')
-with open('countries-and-capitals.txt') as printing_random_line:
-    random_line = printing_random_line.readlines()
-    print(random.choice(random_line))
+with open('countries-and-capitals.txt') as file_txt_of_cc:
+    x = random.randrange(0, 184)
+    random_line = file_txt_of_cc.readlines()
+    # print(file_txt_of_cc.readlines())
+    # print(file_txt_of_cc.readlines(2))
+    # print(random.choice(random_line))
+    random_cc = random.choice(random_line)
+    list_of_random_line.append(random_cc.rstrip('\n'))
     hangman_password_list.close()
-    list_of_random_line.append(random_line[i], end=" ")
 
+print(random_cc)
 print(list_of_random_line)
+print(list_of_random_line[0])
+cc_with_sign_from_list_of_random = list_of_random_line[0]
+list_of_cc_without_sign = cc_with_sign_from_list_of_random.split(' | ')
+country = list_of_cc_without_sign[0] 
+capital = list_of_cc_without_sign[1]
+
+# print(list_of_cc_without_sign)
+# print(list_of_cc_without_sign[0])
+# print(list_of_cc_without_sign[1])
+
+print(country)
+print(capital)
 
 # here insert "while" loop
 while list_of_password_chars != list_of_dashes and chances > 0:
