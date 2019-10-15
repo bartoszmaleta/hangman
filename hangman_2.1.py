@@ -1,5 +1,14 @@
-# bla bla
+# TODO: 
+# score at the end
+# • high score file
+# • continuity game
+# • timer ----> time is being showed
+# • guessing the whole word
+# • sounds
+# • ASCII art
+
 import random
+import time
 
 list_of_password_chars = []
 list_of_dashes = []
@@ -58,35 +67,43 @@ for i in range(len(password)):
 
 print(list_of_dashes)
 print()
-
+user_answer = input('Do you want to start game? ')
 
 # here insert "while" loop
-while list_of_password_chars != list_of_dashes and chances > 0:
-    print('*********************************************', 'You have: ', chances, 'left')
-    guess_letter_input_notype = input('What is your letter? ')
-    if not guess_letter_input_notype.isdigit():
-        guess_letter = guess_letter_input_notype.upper()
+while user_answer == 'y': 
+    print('Your timer starts now!')
+    starttime = time.time()
+    while list_of_password_chars != list_of_dashes and chances > 0:
+        print('*********************************************', 'You have: ', chances, 'left')
+        guess_letter_input_notype = input('What is your letter? ')
+        if not guess_letter_input_notype.isdigit():
+            guess_letter = guess_letter_input_notype.upper()
+            if guess_letter in list_of_password_chars:
+                print('yes it is')
+                parttime = time.time()
+                print(parttime)
+                print(parttime - starttime)
+                stopwatch_no_round = parttime - starttime
+                stopwatch = round(stopwatch_no_round, 2)
+                print(stopwatch)
 
-        if guess_letter in list_of_password_chars:
-            print('yes it is')
-            for i, j in enumerate(list_of_password_chars):
-                if j == guess_letter:
-                    print(i)
-                    list_of_dashes[i] = guess_letter
-                    print(list_of_dashes)
-
+                for i, j in enumerate(list_of_password_chars):
+                    if j == guess_letter:
+                        print(i)
+                        list_of_dashes[i] = guess_letter
+                        print(list_of_dashes)
+            else:
+                list_of_not_in_word_letters.append(guess_letter)
+                chances -= 1
+                print('No, it is not')
+                print(list_of_dashes)
+                print('The letters you have already used: ')
+                print(list_of_not_in_word_letters)
+                for x, value in enumerate(list_of_not_in_word_letters):
+                    print(x)
         else:
-            list_of_not_in_word_letters.append(guess_letter)
-            chances -= 1
-            print('No, it is not')
-            print(list_of_dashes)
-            print('The letters you have already used: ')
-            print(list_of_not_in_word_letters)
-            for x, value in enumerate(list_of_not_in_word_letters):
-                print(x)
-    else:
-        print('You stupid moron! Enter a letter!')
-        print('There is not even one capital in the world which has a number in the name')
+            print('You stupid moron! Enter a letter!')
+            print('There is not even one capital in the world which has a number in the name')
 
 
 # print(list_of_dashes)
