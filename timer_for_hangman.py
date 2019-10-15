@@ -15,7 +15,7 @@ while timeLoop:
     Sec += 1
     print(str(Min) + " Mins " + str(Sec) + " Sec ")
     time.sleep(1)
-    if Sec == 60:
+    if Sec == 10:
         Sec = 0
         Min += 1
         print(str(Min) + " Minute")
