@@ -1,34 +1,16 @@
 # bla bla
 import random
 
-list_of_capitals = ['Austria', 'Belgium', 'Czechia', 'Denmark', 'Estonia', 'Finland', 'France', 'Germany']
-password_capitalize = random.choice(list_of_capitals)
-password = password_capitalize.lower()
 list_of_password_chars = []
 list_of_dashes = []
 list_of_indexes = []
 list_of_not_in_word_letters = []
 list_of_random_line = []
 chances = 10
-# x = random.randrange(0, 184)
 
-print()
-print(password)
-
-for i in range(len(password)):
-    list_of_password_chars.append(password[i])
-
-print(list_of_password_chars)
-
-for i in range(len(password)):
-    list_of_dashes.append(str('-'))
-print('asdasds', 1)
-
-print(list_of_dashes)
-print()
 with open('countries-and-capitals.txt') as hangman_password_list:
-    for i, line in enumerate(hangman_password_list):
-        print(f'{format(i+1)} {line.strip()}')
+    # for i, line in enumerate(hangman_password_list):
+    #     print(f'{format(i+1)} {line.strip()}')
     hangman_password_list.close()
 
 print('++++++++++++++')
@@ -47,8 +29,10 @@ print(list_of_random_line)
 print(list_of_random_line[0])
 cc_with_sign_from_list_of_random = list_of_random_line[0]
 list_of_cc_without_sign = cc_with_sign_from_list_of_random.split(' | ')
-country = list_of_cc_without_sign[0] 
-capital = list_of_cc_without_sign[1]
+country_capitalize = list_of_cc_without_sign[0] 
+capital_capitalize = list_of_cc_without_sign[1]
+country = country_capitalize.upper()
+capital = capital_capitalize.upper()
 
 # print(list_of_cc_without_sign)
 # print(list_of_cc_without_sign[0])
@@ -57,27 +41,52 @@ capital = list_of_cc_without_sign[1]
 print(country)
 print(capital)
 
+password = capital
+
+# x = random.randrange(0, 184)
+
+print()
+print(password)
+
+for i in range(len(password)):
+    list_of_password_chars.append(password[i])
+
+print(list_of_password_chars)
+
+for i in range(len(password)):
+    list_of_dashes.append(str('-'))
+
+print(list_of_dashes)
+print()
+
+
 # here insert "while" loop
 while list_of_password_chars != list_of_dashes and chances > 0:
     print('*********************************************', 'You have: ', chances, 'left')
-    guess_letter = input('What is your letter? ')
-    if guess_letter in list_of_password_chars:
-        print('yes it is')
-        for i, j in enumerate(list_of_password_chars):
-            if j == guess_letter:
-                print(i)
-                list_of_dashes[i] = guess_letter
-                print(list_of_dashes)
-              
+    guess_letter_input_notype = input('What is your letter? ')
+    if not guess_letter_input_notype.isdigit():
+        guess_letter = guess_letter_input_notype.upper()
+
+        if guess_letter in list_of_password_chars:
+            print('yes it is')
+            for i, j in enumerate(list_of_password_chars):
+                if j == guess_letter:
+                    print(i)
+                    list_of_dashes[i] = guess_letter
+                    print(list_of_dashes)
+
+        else:
+            list_of_not_in_word_letters.append(guess_letter)
+            chances -= 1
+            print('No, it is not')
+            print(list_of_dashes)
+            print('The letters you have already used: ')
+            print(list_of_not_in_word_letters)
+            for x, value in enumerate(list_of_not_in_word_letters):
+                print(x)
     else:
-        list_of_not_in_word_letters.append(guess_letter)
-        chances -= 1
-        print('No, it is not')
-        print(list_of_dashes)
-        print('The letters you have already used: ')
-        print(list_of_not_in_word_letters)
-        for x, value in enumerate(list_of_not_in_word_letters):
-            print(x)
+        print('You stupid moron! Enter a letter!')
+        print('There is not even one capital in the world which has a number in the name')
 
 
 # print(list_of_dashes)
