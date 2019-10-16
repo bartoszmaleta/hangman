@@ -1,15 +1,15 @@
 # TODO: 
-# score at the end
+# • score at the end -----> there is score after the winning and losing
 # • high score file
-# • continuity game
-# • timer
+# • continuity game ----> after losing the game is continuated
+# • timer ----> time is being showed only after correct letter, and after the game
 # • guessing the whole word
 # • sounds
 # • ASCII art
 
 import random
 import time
-
+list_of_times_of_the_games = []
 user_answer = input('Do you want to start game? ')
 
 # here insert "while" loop
@@ -110,14 +110,28 @@ while user_answer == 'y':
     if chances < 1:
         print('You loose')
         time_after_loosing = time.time()
-        print(time_after_loosing)
-        time_of_the_game_no_round = time_after_loosing - starttime
-        time_of_the_game = round(time_of_the_game_no_round, 2)
-        print(time_of_the_game)
+        # print(time_after_loosing)
+        time_of_the_game_no_round_after_losing = time_after_loosing - starttime
+        time_of_the_game_after_losing = round(time_of_the_game_no_round_after_losing, 2)
+        print('Your time: ', time_of_the_game_after_losing)
         ask = input('Once again?')
         user_answer = ask
         chances = 10
-        
+    
+    if list_of_password_chars == list_of_dashes:
+        print('You won!')
+        time_after_winning = time.time()
+        time_of_the_game_no_round_afer_winning = time_after_winning - starttime
+        time_of_the_game_afer_winning = round(time_of_the_game_no_round_afer_winning, 2)
+        list_of_times_of_the_games.append(time_of_the_game_afer_winning)
+        print('Your time: ', time_of_the_game_afer_winning, 'and you still have ', chances, 'chances left')
+        print(list_of_times_of_the_games)
+        sum_of_list_of_times_of_the_games = sum(list_of_times_of_the_games)
+        print('Your total time is: ', sum_of_list_of_times_of_the_games)
+        ask = input('Once again?')
+        user_answer = ask
+        chances = 10
+
 
 # print(list_of_dashes)
 # print('The letters you have already used: ')
