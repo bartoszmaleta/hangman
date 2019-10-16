@@ -2,7 +2,7 @@
 # score at the end
 # • high score file
 # • continuity game
-# • timer ----> time is being showed
+# • timer ----> time is being showed only after correct letter
 # • guessing the whole word
 # • sounds
 # • ASCII art
