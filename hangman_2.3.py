@@ -6,6 +6,7 @@
 # • guessing the whole word
 # • sounds
 # • ASCII art
+# • hint ----> you can buy a hint for 200$, one letter gives you 100 $
 
 import random
 import time
@@ -19,8 +20,10 @@ while user_answer == 'y':
     list_of_dashes = []
     list_of_indexes = []
     list_of_not_in_word_letters = []
+    list_of_i = []
     list_of_random_line = []
     chances = 10
+    money = 0
 
     with open('countries-and-capitals.txt') as hangman_password_list:
         # for i, line in enumerate(hangman_password_list):
@@ -77,7 +80,12 @@ while user_answer == 'y':
     starttime = time.time()
     while list_of_password_chars != list_of_dashes and chances > 0 and user_answer == 'y':
         print('*********************************************', 'You have: ', chances, 'left')
-        guess_letter_input_notype = input('What is your letter? ')
+        print('What is your letter? (If you want: ')
+        print('- buy a hint, press $ (cost 200$)')
+        print('- guess the whole password, press .')
+        
+        guess_letter_input_notype = input('?')
+        print()
         if not guess_letter_input_notype.isdigit():
             guess_letter = guess_letter_input_notype.upper()
             if guess_letter in list_of_password_chars:
@@ -94,6 +102,26 @@ while user_answer == 'y':
                         print(i)
                         list_of_dashes[i] = guess_letter
                         print(list_of_dashes)
+                        money += 100       
+ 
+                print('Your money: ', money)        
+ 
+            elif guess_letter == '.':
+                guessing_the_whole_password_different_size = input('What is the password? ')
+                guessing_the_whole_password = guessing_the_whole_password_different_size.upper()
+                print(guessing_the_whole_password_different_size)
+                print(guessing_the_whole_password)
+                print(password)
+                if guessing_the_whole_password == password: 
+                    print('Good job')
+                    user_answer = 'y'
+                else:
+                    print('The guessing is wrong!')
+            elif guess_letter == '$':
+                cost_of_hint = 200
+                print('The password is capital of ', country)
+                print('You have ', money - cost_of_hint, 'left')
+
             else:
                 list_of_not_in_word_letters.append(guess_letter)
                 chances -= 1
@@ -103,9 +131,14 @@ while user_answer == 'y':
                 print(list_of_not_in_word_letters)
                 for x, value in enumerate(list_of_not_in_word_letters):
                     print(x)
+        
         else:
             print('You stupid moron! Enter a letter!')
             print('There is not even one capital in the world which has a number in the name')
+
+        # else:
+        #     print('You stupid moron! Enter a letter!')
+        #     print('There is not even one capital in the world which has a number in the name')
     
     if chances < 1:
         print('You loose')
@@ -114,7 +147,7 @@ while user_answer == 'y':
         time_of_the_game_no_round_after_losing = time_after_loosing - starttime
         time_of_the_game_after_losing = round(time_of_the_game_no_round_after_losing, 2)
         print('Your time: ', time_of_the_game_after_losing)
-        ask = input('Once again?')
+        ask = input('Once again? (y/n)')  # we dont have option 'n'!!!!!
         user_answer = ask
         chances = 10
     
