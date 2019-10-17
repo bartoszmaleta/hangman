@@ -1,11 +1,12 @@
 # TODO: 
-# • high score file
-# • sounds
+# • high score file, comparing scores
 # • ASCII arty
 # • clear terminal after each question
 # • input starter 'y' ---> make it notCaseSensitive
+# • graphics
 # • input starter in the table!!!
 
+# • sounds?????
 # • chances, money should stay after rounds ??????
 
 import random
