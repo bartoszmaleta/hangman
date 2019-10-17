@@ -1,11 +1,10 @@
 # TODO: 
-# • high score file, comparing scores
-# • ASCII arty ---> after losing
+# • high score file, comparing scores ----> necessarily
+# • ASCII arty ---> after losing only
 # • clear terminal after each question ?????
 # • input starter 'y' ---> make it notCaseSensitive
-# • graphics        ----> change to 5 for loop
+# • graphics        ----> change to 5 for loop!!!!!!!!!!!!!!!!!!!!!!!!!!!
 # • center allign
-# • input starter in the table!!!
 
 # • sounds?????
 # • chances, money should stay after rounds ??????
@@ -290,29 +289,21 @@ print()
 print('_______________')
 print('|')
 user_name_answer = input('| ')
-print('|_______________')
-print()
+print('|______________')
 
+print()
 print('Hello', user_name_answer, '!!! Do you want to start a game? (y/n)')
 print()
 user_answer = input('')
 print()
-print()
-print()
-print()
-print()
-txt = '\033[1;34;49m Welcome in the HANGMAN!'
-welcome_text = txt.center(120)
-# print('Welcome the HANGMAN')
-print(welcome_text)
+welcome_text = '\033[1;33;49m Welcome in the HANGMAN!'
+welcome_text_alignment = welcome_text.center(100)
+copyrights_text = '\033[1;32;49m Michał Z., Bartosz M., Przemysław B.'
+copyrights_alignment = copyrights_text.center(100)
+print(welcome_text_alignment)
+print(copyrights_alignment)
 print('\033[0;37;49m \n')
-time.sleep(2)
-
-# lost_info = (spaces + """ \033[1;34;49m YOU HAVE LOST!!!!!!  \n""")
-# print(lost_info)
-# print(" ")
-# time.sleep(x)
-# print(""" \033[0;37;49m \n""")
+time.sleep(5)
 
 while user_answer == 'y' or user_answer == 'Y':  # do better caseSensitive
     print('\033[H\033[J')  # how to kill terminal during game???????
@@ -366,7 +357,9 @@ while user_answer == 'y' or user_answer == 'Y':  # do better caseSensitive
 
     for i in range(len(password)):
         list_of_dashes.append(str('-'))
-
+    print()
+    print('Small hint: the password is a capital of one of country in the world.')
+    print()
     print(list_of_password_chars)
     print(list_of_dashes)
     print()
@@ -378,9 +371,9 @@ while user_answer == 'y' or user_answer == 'Y':  # do better caseSensitive
         print('You have: ', chances, 'chances left')  
         print()
         print('Now you can: ')
-        print('- guess a letter (enter whatever letter you want)')
-        print('- buy a hint ----> press $ (cost 200$)')
-        print('- guess the whole password ----> press .')
+        print('- guess a letter ----> enter whatever letter you want')
+        print('- buy a hint ----> press [$] (cost 200$)')
+        print('- guess the whole password ----> press [.]')
         guess_letter_input_notype = input('')
         print('----------------------------------------------------------')
         print()
