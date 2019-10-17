@@ -1,19 +1,29 @@
 # TODO: 
 # • score at the end -----> there is score after the winning and losing
 # • high score file
-# • continuity game ----> after losing the game is continuated
 # • timer ----> time is being showed only after correct letter, and after the game
-# • guessing the whole word
 # • sounds
 # • ASCII art
-# • loop after correct password!!!!!!!
 # • your timer after entering letter!!! change it!
 # • input starter 'y' ---> make it notCaseSensitive
 # • hint ----> you can buy a hint for 200$, one letter gives you 100 $
+# • chances, money should stay after rounds 
 
 import random
 import time
+
+
+# def good_password_guess():
+#     if guessing_the_whole_password == password: 
+#         print('Good job')
+#         ask = input('Once again? (y/n)')  # we dont have option 'n'!!!!!
+#         return ask
+#     else:
+#         print('The guessing is wrong!')
+
+
 list_of_times_of_the_games = []
+number_of_question = 1
 print()
 print('                    ##########################################')  # spaces = 20
 user_question = ('                    #### Do you want to start game? (y/n) #### ')
@@ -31,9 +41,7 @@ while user_answer == 'y':
     list_of_i = []
     list_of_random_line = []
     chances = 10
-    money = 0
-    number_of_question = 0 
-    number_of_question += 1
+    money = 0 
 
     with open('countries-and-capitals.txt') as hangman_password_list:
         # for i, line in enumerate(hangman_password_list):
@@ -57,6 +65,7 @@ while user_answer == 'y':
     capital_capitalize = list_of_cc_without_sign[1]
     country = country_capitalize.upper()
     capital = capital_capitalize.upper()
+    length_of_password = len(capital)
 
     # print(list_of_cc_without_sign)
     # print(list_of_cc_without_sign[0])
@@ -77,8 +86,9 @@ while user_answer == 'y':
     print()
 
     starttime = time.time()
+    print('Your timer starts now!')
     while list_of_password_chars != list_of_dashes and chances > 0 and user_answer == 'y':
-        print('Your timer starts now! You have: ', chances, 'left')  # your timer appears after each letter!! repair!
+        print('You have: ', chances, 'left')  # your timer appears after each letter!! repair!
         print('Now you can: ')
         print('- guess a letter (enter whatever letter you want)')
         print('- buy a hint ----> press $ (cost 200$)')
@@ -111,26 +121,14 @@ while user_answer == 'y':
             elif guess_letter == '.':
                 guessing_the_whole_password_different_size = input('What is the password? ')
                 guessing_the_whole_password = guessing_the_whole_password_different_size.upper()
-                print(guessing_the_whole_password_different_size)
-                print(guessing_the_whole_password)
-                print(password)
-                if guessing_the_whole_password == password: 
-                    print('Good job')
-                    user_answer = 'y'  # doesnt loop! DIDNT CHOOSE NEXT RANDOM QUESTION
-                    # time_after_winning = time.time()
-                    # time_of_the_game_no_round_afer_winning = time_after_winning - starttime
-                    # time_of_the_game_afer_winning = round(time_of_the_game_no_round_afer_winning, 2)
-                    # list_of_times_of_the_games.append(time_of_the_game_afer_winning)
-                    # print('Your time: ', time_of_the_game_afer_winning,
-                    #  'and you still have ', chances, 'chances left')   ---> TO THE ABOVE LINE
-                    # print(list_of_times_of_the_games)
-                    # sum_of_list_of_times_of_the_games = sum(list_of_times_of_the_games)
-                    # print('Your total time is: ', sum_of_list_of_times_of_the_games)
-                    # ask = input('Once again?')
-                    # user_answer = ask
-                    # chances = 10
-                else:
-                    print('The guessing is wrong!')
+                print('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!')
+                # print(guessing_the_whole_password_different_size)
+                # print(guessing_the_whole_password)
+                # print(password)
+                # good_password_guess()
+                wining_by_guessing_the_whole_password = 5
+                break
+
             elif guess_letter == '$':
                 cost_of_hint = 200
                 print('----------------------------------------------------------')
@@ -151,10 +149,6 @@ while user_answer == 'y':
             print('You stupid moron! Enter a letter!')
             print('There is not even one capital in the world which has a number in the name')
 
-        # else:
-        #     print('You stupid moron! Enter a letter!')
-        #     print('There is not even one capital in the world which has a number in the name')
-    
     if chances < 1:
         print('You loose')
         time_after_loosing = time.time()
@@ -166,7 +160,7 @@ while user_answer == 'y':
         user_answer = ask
         chances = 10
     
-    if list_of_password_chars == list_of_dashes:
+    if list_of_password_chars == list_of_dashes or wining_by_guessing_the_whole_password == 5:
         print('You won!')
         time_after_winning = time.time()
         time_of_the_game_no_round_afer_winning = time_after_winning - starttime
@@ -178,8 +172,9 @@ while user_answer == 'y':
         print('Your total time is: ', sum_of_list_of_times_of_the_games)
         ask = input('Once again? (y/n)')
         user_answer = ask
-        chances = 10
+        number_of_question += 1
 
+        chances = 10
 
 # print(list_of_dashes)
 # print('The letters you have already used: ')

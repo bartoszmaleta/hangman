@@ -32,14 +32,14 @@ print(spaces_40)
 
 print(sorted_HS)
 print('                    ', "Hall of Fame")
-print('Name', '                                        ', 'Score')
+print('Name', '                                        ', ' Score')
 
 for key, val in sorted_HS:
     length_of_key = len(key)
-    #  print(length_of_key)
+    # print(length_of_key)
     val_str = str(val)
     length_of_val = len(val_str)
     number_of_spaces = 50 - length_of_key - length_of_val
     trailing_spaces = int(number_of_spaces) * spaces
-    print(val, trailing_spaces, key)
+    print(key, trailing_spaces, val)
     # print(val, spaces_40, key)

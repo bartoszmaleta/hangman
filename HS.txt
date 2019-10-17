@@ -1,6 +1,0 @@
-Bob | 3
-Roni | 14
-Sara | 1
-Ben | 23665
-Mark | 348
-David | 12
