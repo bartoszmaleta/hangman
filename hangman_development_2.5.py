@@ -5,22 +5,23 @@
 # • input starter 'y' ---> make it notCaseSensitive
 # • graphics        ----> change to 5 for loop!!!!!!!!!!!!!!!!!!!!!!!!!!!
 # • center allign
-
+# change sleep copyrights, change time of ship crash!!!
 # • sounds?????
 # • chances, money should stay after rounds ??????
 
 import random
 import time
+import operator
 
 
 def ship_crash(): 
-    x = 0.8
+    x = 0.8  
     space = (' ')
     range_of_spaces = 120
 
     # x = float(input("speed"))
     # while time.time() > 0: 
-    for i in range(1):   
+    for i in range(5):   
         print('\033[H\033[J')
         # number_of_infos += 2
         print("""                                          \033[1;32;49 \n""")
@@ -213,70 +214,85 @@ def creating_highscore_file_after_losing():
     with open('highscores2.txt', 'a') as hs:
         line_hs_one_str = (
             str(user_name_answer) +
-            ' | ' +
+            ' : ' +
             str(datetime_object_after_losing) +
-            ' | ' +
-            str(time_of_the_game_after_losing) +
-            ' | ' +
+            ' : ' +
             str(chances) +
-            ' | ' +
+            ' : ' +
             str(password) +
-            ' | ' +
-            str(money))
-        print(line_hs_one_str)
-        line_hs = (
-            user_name_answer,
-            ' | ',
-            datetime_object_after_losing,
-            ' | ',
-            time_of_the_game_after_losing,
-            ' | ',
-            chances,
-            ' | ',
-            password,
-            ' | ',
-            money)
-        print(line_hs)
-        line_hs_str = str(line_hs)
-        hs.write(line_hs_str + '\n')
-        hs.write(line_hs_one_str + '\n')
+            ' | ')
+        line_with_time = (time_of_the_game_after_losing)
+        line_with_time_str = str(line_with_time)
+        hs.write(line_hs_one_str + line_with_time_str + '\n')
         hs.close()
+
+
+# name| date | guessing_time | guessing_tries | guessed_word 
+# Marcin | 26.10.2016 14:15 | 45 | Warszawa
 
 
 def creating_highscore_file_after_wining():
     with open('highscores2.txt', 'a') as hs:
         line_hs_one_str = (
             str(user_name_answer) +
-            ' | ' +
-            str(datetime_object_after_losing) +
-            ' | ' +
-            str(sum_of_list_of_times_of_the_games) +
-            ' | ' +
+            ' : ' +
+            str(datetime_object_after_winning) +
+            ' : ' +
             str(chances) +
-            ' | ' +
+            ' : ' +
             str(password) +
-            ' | ' +
-            str(money))
-    
-        print(line_hs_one_str)
-        line_hs = (
-            user_name_answer,
-            ' | ',
-            datetime_object_after_losing,
-            ' | ',
-            sum_of_list_of_times_of_the_games,
-            ' | ',
-            chances,
-            ' | ',
-            password,
-            ' | ',
-            money)
-        print(line_hs)
-        line_hs_str = str(line_hs)
-        hs.write(line_hs_str + '\n')
-        hs.write(line_hs_one_str + '\n')
+            ' | ')
+        line_with_time = (time_of_the_game_afer_winning)
+        line_with_time_str = str(line_with_time)
+        hs.write(line_hs_one_str + line_with_time_str + '\n')
         hs.close()
     
+
+def highscore_table():
+    HS_dict = {}
+
+    with open("highscores2.txt") as f:
+        for line in f:
+            (key, val) = line.split(" | ")
+            HS_dict[(key)] = float(val.rstrip('\n'))
+
+    # print(HS_dict)
+
+    sorted_HS = sorted(HS_dict.items(), key=operator.itemgetter(-1))
+
+    # print(sorted_HS)
+
+    # x = 0
+    # y = 0
+    spaces = ' '
+
+    # spaces_20 = spaces * 20
+    spaces_40 = spaces * 40
+    print(spaces_40)
+
+    # length_of_key = int(len(key))
+    # length_of_val = int(len(val))
+    # number_of_spaces = 50 - length_of_key - length_of_val
+    # print(number_of_spaces)
+
+    # trailing_spaces = int(number_of_spaces) * spaces
+    # print(trailing_spaces)
+
+    # print(sorted_HS)
+    print('                    ', "Hall of Fame")
+    print('Name', '                                                            ', ' Score')
+    print()
+
+    for key, val in sorted_HS:
+        length_of_key = len(key)
+        # print(length_of_key)
+        val_str = str(val)
+        length_of_val = len(val_str)
+        number_of_spaces = 70 - length_of_key - length_of_val
+        trailing_spaces = int(number_of_spaces) * spaces
+        print(key, trailing_spaces, val)
+        # print(val, spaces_40, key)
+
 
 list_of_times_of_the_games = []
 number_of_question = 1
@@ -303,7 +319,7 @@ copyrights_alignment = copyrights_text.center(100)
 print(welcome_text_alignment)
 print(copyrights_alignment)
 print('\033[0;37;49m \n')
-time.sleep(5)
+time.sleep(5)         # change to 5       
 
 while user_answer == 'y' or user_answer == 'Y':  # do better caseSensitive
     print('\033[H\033[J')  # how to kill terminal during game???????
@@ -444,6 +460,7 @@ while user_answer == 'y' or user_answer == 'Y':  # do better caseSensitive
         time_of_the_game_after_losing = round(time_of_the_game_no_round_after_losing, 2)
         print('Your time in this round: ', time_of_the_game_after_losing)
         datetime_object_after_losing = time.asctime(time.localtime(time.time()))
+
         creating_highscore_file_after_losing()
 
         # name| date | guessing_time | guessing_tries?? | guessed_word 
@@ -458,8 +475,11 @@ while user_answer == 'y' or user_answer == 'Y':  # do better caseSensitive
         if ask == 'y' or ask == 'Y':
             user_answer = ask
             chances = length_of_password
+
             continue
         else:
+            highscore_table()
+            time.sleep(5)
             exit()
     
     if list_of_password_chars == list_of_dashes or wining_by_guessing_the_whole_password == 5:
@@ -473,13 +493,12 @@ while user_answer == 'y' or user_answer == 'Y':  # do better caseSensitive
         #  print(list_of_times_of_the_games)
         sum_of_list_of_times_of_the_games = sum(list_of_times_of_the_games)
         print('Your total time is: ', sum_of_list_of_times_of_the_games)
-        ask = input('Once again? (y/n)')
+        ask = input('Once again? (y/n) ')
         
         user_answer = ask
         number_of_question += 1
         chances = length_of_password
-        datetime_object_after_losing = time.asctime(time.localtime(time.time()))
+        datetime_object_after_winning = time.asctime(time.localtime(time.time()))
 
-        creating_highscore_file_after_wining()
-
+        creating_highscore_file_after_wining()    
         continue
